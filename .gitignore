@@ -3,6 +3,8 @@ data/log*
 models/mypilot
 .idea/
 
+*.h5
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
