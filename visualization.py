@@ -107,5 +107,38 @@ class Plot(object):
         return plt
 
 
+    @staticmethod
+    def angle_prediction(ground_truthes, predictions):
+        plt.plot(ground_truthes, label="ground truth")
+        plt.plot(predictions, label="prediction")
+        plt.ylim((-1, 1))
+        plt.legend()
+        return plt
+
+
+    @staticmethod
+    def video_from_datasets(gif_file_name, dataset):
+        frames = []
+        duration_pre_image = 0.5
+        feeding_angle = 1. #feeding_data.steering_angle
+        index = 0
+        total = len(dataset.records)
+        for feeding_data in dataset.records:
+            index = index + 1
+            if index % 10 == 0:
+                print("working {}/{}".format(index + 1, total))
+                image, angle = feeding_data.image(), feeding_data.steering_angle
+                text = TextClip(txt="angle:{:.2f}/{:.2f}".format(feeding_angle, angle),
+                                method="caption", align="North",
+                                color="white", stroke_width=3, fontsize=18)
+                text = text.set_duration(duration_pre_image)
+                frames.append(CompositeVideoClip([
+                    ImageClip(image, duration=duration_pre_image),
+                    text
+                ]))
+        final = concatenate_videoclips(frames)
+        final.write_videofile(gif_file_name, fps=2)
+
+
 if __name__ == "__main__":
     Video.from_folder("/Users/james/git/face_generation_gan/imgs/face/*.png", "/Users/james/git/face_generation_gan/imgs/face.mp4")

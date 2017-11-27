@@ -1,8 +1,10 @@
 logs/
 data/log*
-models/mypilot
+data/
+data_auto/
+models/
 .idea/
-
+a/
 *.h5
 
 # Byte-compiled / optimized / DLL files

@@ -24,6 +24,7 @@ from donkeycar.parts.actuator import PCA9685, PWMSteering, PWMThrottle
 from donkeycar.parts.datastore import TubHandler, TubGroup
 from donkeycar.parts.controller import LocalWebController, JoystickController
 
+from keras_free import PilotKeras
 
 
 def drive(cfg, model_path=None, use_joystick=False):
@@ -71,9 +72,12 @@ def drive(cfg, model_path=None, use_joystick=False):
     V.add(pilot_condition_part, inputs=['user/mode'], outputs=['run_pilot'])
     
     #Run the pilot if the mode is not user.
-    kl = KerasCategorical()
+    # kl = KerasCategorical()
+
+    kl = PilotKeras()
     if model_path:
         kl.load(model_path)
+
     
     V.add(kl, inputs=['cam/image_array'], 
           outputs=['pilot/angle', 'pilot/throttle'],
