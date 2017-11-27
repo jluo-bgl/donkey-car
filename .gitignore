@@ -2,10 +2,9 @@ logs/
 data/log*
 data/
 data_auto/
-models/
 .idea/
 a/
-*.h5
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

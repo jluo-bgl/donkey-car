@@ -61,7 +61,7 @@ class PilotKeras:
     def load(self, model_json_file):
         # with open(model_json_file, 'r') as jfile:
         #     model = model_from_json(jfile.read())
-        model = nvidia(input_shape=(160, 120, 3), dropout=0.0)
+        model = nvidia(input_shape=(120, 160, 3), dropout=0.0)
 
         model.compile("adam", "mse")
 
